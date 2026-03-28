@@ -64,9 +64,8 @@ const Saved = () => {
               <></>
             ) : (
               savedData.map((element) => {
-                console.log(savedData.length);
                 return (
-                  <Tr >
+                  <Tr key={element.id}>
                     <Td>
                       <FaStar
                         size={25}
@@ -129,7 +128,7 @@ const Saved = () => {
                       }}
                     >
                       {typeof element.price_change_percentage_24h == "number"
-                        ? element.price_change_percentage_24h.toFixed(4)
+                        ? element.price_change_percentage_24h_in_currency.toFixed(4)
                         : `${element.price_change_percentage_24h}`}
                     </Td>
                     <Td

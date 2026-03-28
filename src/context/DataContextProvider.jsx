@@ -14,6 +14,17 @@ function DataContextProvider({ children }) {
     dataFunc();
   }, [currency, sortParam, pageNo]);
 
+  useEffect(() => {
+    getTrendData();
+  }, []);
+
+  const getTrendData = async () => {
+    const res = await axios.get(
+      "https://api.coingecko.com/api/v3/search/trending"
+    );
+    setTrendData(res?.data?.coins);
+  };
+
   const dataFunc = async () => {
     const data1 = await axios.get(
       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=${sortParam}&per_page=10&page=${pageNo}&price_change_percentage=1h%2C24h%2C7d`

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import {
@@ -17,19 +16,7 @@ const Trending = () => {
   const navigate = useNavigate();
   const value = useContext(DataContext);
   const trendData = value.trendData;
-  const setTrendData = value.setTrendData;
 
-  useEffect(() => {
-    getTrendData();
-  }, []);
-
-  const getTrendData = async () => {
-    const trendingData = await axios.get(
-      `https://api.coingecko.com/api/v3/search/trending`
-    );
-    setTrendData(trendingData?.data?.coins);
-    console.log(trendData);
-  };
   return (
     <div style={{padding: "0px 20px 20px"}}>
       <TableContainer
@@ -56,14 +43,14 @@ const Trending = () => {
           <Tbody>
             {trendData?.map((element) => {
               return (
-                <Tr>
+                <Tr key={element.item.id}>
                   <Td onClick={() => navigate(`/${element.item.id}`)} style={{cursor: "pointer"}}>
                     <img src={element.item.small} style={{height:40,width:40}}/>
                     <p>{element.item.symbol}</p>
                   </Td>
                   <Td>{element.item.name}</Td>
                   <Td>{element.item.market_cap_rank}</Td>
-                  <Td>{"$" + element.item.data.price.toFixed(4)}</Td>
+                  <Td>{"$" + parseFloat(element.item.data.price).toFixed(4)}</Td>
                   <Td>{element.item.price_btc.toFixed(9)}</Td>
                   <Td>{element.item.data.market_cap}</Td>
                   <Td>{element.item.data.total_volume}</Td>

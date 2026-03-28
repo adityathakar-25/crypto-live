@@ -12,9 +12,9 @@ const Loader = () => {
       }}
     >
       <div class="loader">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
       </div>
     </div>
   );
